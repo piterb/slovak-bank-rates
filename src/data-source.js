@@ -10,6 +10,7 @@ import {
 
 const AGGREGATE_SOURCE_URL = 'https://www.kurzy-online.sk/kurzovy-listok/';
 const JT_API_URL = 'https://www.jtbanka.sk/jtdigi/api/exchangerate/list';
+const EXCLUDED_BANKS = new Set(['Oberbank']);
 
 const DIRECT_SOURCES = [
   {
@@ -22,12 +23,6 @@ const DIRECT_SOURCES = [
     url: 'https://ibank.pentabank.com/Extranet/Pages/ExchangeList.aspx',
     officialUrl: 'https://www.pentabank.sk/',
     layout: 'full5'
-  },
-  {
-    bank: 'Oberbank',
-    url: 'https://www.kurzy-online.sk/kurzovy-listok/oberbank/',
-    officialUrl: 'https://www.oberbank.sk/',
-    layout: 'deviza3'
   },
   {
     bank: 'J&T Banka',
@@ -170,7 +165,9 @@ export async function getRates({ force = false } = {}) {
       DIRECT_SOURCES.map((source) => fetchDirectBank(source, fetchedAt))
     );
 
-    const aggregateBanks = aggregate.banks.map(mergeBrandAliases);
+    const aggregateBanks = aggregate.banks
+      .filter((bank) => !EXCLUDED_BANKS.has(bank.bank))
+      .map(mergeBrandAliases);
     const bankMap = new Map(aggregateBanks.map((bank) => [bank.bank, bank]));
     const sourceErrors = [];
 

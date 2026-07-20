@@ -16,10 +16,10 @@ Otvorte `http://localhost:3000`.
 - spoločný prehľad: kurzy-online.sk,
 - mBank: oficiálny kurzový lístok,
 - Penta Bank: oficiálny internetbankingový kurzový lístok,
-- J&T Banka: verejné JSON API používané oficiálnou stránkou; pri víkende alebo sviatku sa automaticky skúsi posledný dostupný deň,
-- Oberbank: samostatná stránka kurzy-online.sk.
+- J&T Banka: verejné JSON API používané oficiálnou stránkou; pri víkende alebo sviatku sa automaticky skúsi posledný dostupný deň.
 
 Tatra banka a Raiffeisen banka sú zobrazené spolu, pretože používajú rovnaký kurzový lístok.
+Oberbank je z porovnania vyradená pre nespoľahlivé zdrojové kurzy.
 
 ## Test
 
