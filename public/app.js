@@ -34,6 +34,14 @@ function localeRate(value) {
   }).format(value);
 }
 
+function differenceLabel(difference, targetCurrency, bestRate) {
+  const formattedDifference = localeNumber(difference, targetCurrency);
+  if (targetCurrency === 'EUR') return formattedDifference;
+
+  const euroEquivalent = difference / bestRate;
+  return `${formattedDifference} (≈ ${localeNumber(euroEquivalent, 'EUR', 2, 2)})`;
+}
+
 function dateLabel(isoDate) {
   if (!isoDate) return 'neuvedené';
   return new Intl.DateTimeFormat('sk-SK').format(new Date(`${isoDate}T12:00:00`));
@@ -117,7 +125,11 @@ function render() {
   const worst = rows.at(-1);
   elements.bestBank.textContent = best.bank;
   elements.bestResult.textContent = localeNumber(best.result, targetCurrency);
-  elements.bestDifference.textContent = localeNumber(best.result - worst.result, targetCurrency);
+  elements.bestDifference.textContent = differenceLabel(
+    best.result - worst.result,
+    targetCurrency,
+    best.rate
+  );
 
   elements.ratesBody.innerHTML = rows.map((row, index) => {
     const difference = best.result - row.result;
@@ -128,7 +140,7 @@ function render() {
         <td data-label="Banka"><strong>${row.bank}</strong>${bestBadge}</td>
         <td data-label="Použitý kurz">${localeRate(row.rate)}</td>
         <td data-label="Výsledok"><strong>${localeNumber(row.result, targetCurrency)}</strong></td>
-        <td data-label="Rozdiel">${index === 0 ? '–' : `− ${localeNumber(difference, targetCurrency)}`}</td>
+        <td data-label="Rozdiel od najlepšej">${index === 0 ? '–' : `− ${differenceLabel(difference, targetCurrency, best.rate)}`}</td>
         <td data-label="Platnosť">${dateLabel(row.validDate)}</td>
         <td data-label="Zdroj"><a href="${row.officialUrl}" target="_blank" rel="noreferrer">Banka ↗</a></td>
       </tr>`;

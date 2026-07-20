@@ -78,4 +78,53 @@ footer { margin: 22px 2px 0; color: var(--muted); font-size: .82rem; }
   .secondary { width: 100%; }
   .table-head { align-items: flex-start; flex-direction: column; }
   .updated { text-align: left; }
+  .table-card { overflow: visible; border: 0; background: transparent; box-shadow: none; }
+  .table-head { margin-bottom: 12px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+  .table-scroll { overflow: visible; }
+  table { display: block; min-width: 0; }
+  thead { display: none; }
+  tbody { display: grid; gap: 12px; }
+  tbody tr {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+  }
+  tbody tr.winner { border-color: var(--accent); background: var(--accent-soft); }
+  tbody tr.winner td { background: transparent; }
+  tbody td {
+    display: flex;
+    min-width: 0;
+    padding: 12px 14px;
+    flex-direction: column;
+    gap: 4px;
+    border: 0;
+  }
+  tbody td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  tbody td:first-child { display: none; }
+  tbody td[data-label="Banka"] {
+    grid-column: 1 / -1;
+    padding: 16px 14px 12px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td[data-label="Banka"]::before { display: none; }
+  tbody td[data-label="Rozdiel od najlepšej"] { grid-column: 1 / -1; }
+  tbody td[data-label="Zdroj"] {
+    grid-column: 1 / -1;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
 }
