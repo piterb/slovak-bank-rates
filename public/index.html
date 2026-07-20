@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="sk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Najvýhodnejší kurz slovenských bánk</title>
+  <meta name="description" content="Porovnanie kurzových lístkov slovenských bánk podľa reálneho výsledku pre zadnú sumu.">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">AKTUÁLNE KURZOVÉ LÍSTKY</p>
+        <h1>Najvýhodnejší kurz bánk</h1>
+        <p class="lede">Vyber menu, smer a sumu. Banky zoradíme podľa toho, koľko reálne dostaneš.</p>
+      </div>
+      <button id="refreshButton" class="secondary" type="button">Obnoviť kurzy</button>
+    </header>
+
+    <section class="controls card" aria-label="Nastavenie výmeny">
+      <label>
+        <span>Mena</span>
+        <select id="currency" aria-label="Cudzia mena"></select>
+      </label>
+      <label>
+        <span>Smer výmeny</span>
+        <select id="direction">
+          <option value="eur-to-fx">EUR → cudzia mena</option>
+          <option value="fx-to-eur">Cudzia mena → EUR</option>
+        </select>
+      </label>
+      <label>
+        <span>Typ</span>
+        <select id="kind">
+          <option value="deviza">Devízy – bezhotovostne</option>
+          <option value="valuta">Valuty – hotovosť</option>
+        </select>
+      </label>
+      <label>
+        <span>Suma</span>
+        <div class="amount-wrap">
+          <input id="amount" type="number" min="0.01" step="0.01" value="1000" inputmode="decimal">
+          <strong id="amountCurrency">EUR</strong>
+        </div>
+      </label>
+    </section>
+
+    <section class="summary-grid" aria-live="polite">
+      <article class="card metric">
+        <span>Najlepšia banka</span>
+        <strong id="bestBank">–</strong>
+      </article>
+      <article class="card metric">
+        <span>Dostaneš</span>
+        <strong id="bestResult">–</strong>
+      </article>
+      <article class="card metric">
+        <span>Rozdiel oproti najhoršej</span>
+        <strong id="bestDifference">–</strong>
+      </article>
+    </section>
+
+    <div id="status" class="status" role="status">Načítavam aktuálne kurzy…</div>
+
+    <section class="table-card card">
+      <div class="table-head">
+        <div>
+          <h2>Porovnanie bánk</h2>
+          <p id="comparisonLabel">–</p>
+        </div>
+        <span id="updatedAt" class="updated">–</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Banka</th>
+              <th>Použitý kurz</th>
+              <th>Výsledok</th>
+              <th>Rozdiel od najlepšej</th>
+              <th>Platnosť</th>
+              <th>Zdroj</th>
+            </tr>
+          </thead>
+          <tbody id="ratesBody"></tbody>
+        </table>
+      </div>
+      <div id="emptyState" class="empty" hidden>Pre túto menu a typ výmeny nie sú dostupné údaje.</div>
+    </section>
+
+    <aside class="notice">
+      <strong>Dôležité:</strong> Porovnanie nezahŕňa poplatky, individuálne kurzy pri vyšších sumách ani kartové kurzy Visa/Mastercard. „Nákup“ a „predaj“ sú pomenované z pohľadu banky.
+    </aside>
+
+    <footer>
+      Dáta sa načítajú pri každom otvorení alebo obnovení stránky. Hlavný agregovaný zdroj:
+      <a href="https://www.kurzy-online.sk/kurzovy-listok/" target="_blank" rel="noreferrer">kurzy-online.sk</a>; vybrané chýbajúce banky sa načítavajú priamo z ich oficiálnych stránok.
+    </footer>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "slovak-bank-rates",
+  "version": "1.4.2",
+  "private": true,
+  "description": "Porovnanie aktuálnych kurzových lístkov slovenských bánk.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cheerio": "1.0.0",
+    "express": "^4.21.2"
+  }
+}
