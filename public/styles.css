@@ -55,6 +55,7 @@ th, td { padding: 15px 18px; text-align: left; border-top: 1px solid var(--line)
 th { color: var(--muted); background: #fafbfc; font-size: .76rem; text-transform: uppercase; letter-spacing: .04em; }
 td { font-size: .92rem; }
 tr.winner td { background: var(--accent-soft); }
+.mobile-meta, .best-label { display: none; }
 .badge { display: inline-block; margin-left: 8px; padding: 3px 7px; border-radius: 999px; background: var(--accent); color: white; font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; }
 .empty { padding: 30px; color: var(--muted); text-align: center; border-top: 1px solid var(--line); }
 .notice { margin: 18px 2px 0; padding: 15px 17px; border-left: 4px solid var(--warning); background: #fff9e9; color: #60470f; border-radius: 8px; font-size: .9rem; }
@@ -78,53 +79,26 @@ footer { margin: 22px 2px 0; color: var(--muted); font-size: .82rem; }
   .secondary { width: 100%; }
   .table-head { align-items: flex-start; flex-direction: column; }
   .updated { text-align: left; }
-  .table-card { overflow: visible; border: 0; background: transparent; box-shadow: none; }
-  .table-head { margin-bottom: 12px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+  .table-card { overflow: visible; border-radius: 14px; }
+  .table-head { padding: 18px 16px 14px; }
   .table-scroll { overflow: visible; }
-  table { display: block; min-width: 0; }
-  thead { display: none; }
-  tbody { display: grid; gap: 12px; }
-  tbody tr {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    background: var(--surface);
-    box-shadow: var(--shadow);
-  }
-  tbody tr.winner { border-color: var(--accent); background: var(--accent-soft); }
-  tbody tr.winner td { background: transparent; }
-  tbody td {
-    display: flex;
-    min-width: 0;
-    padding: 12px 14px;
-    flex-direction: column;
-    gap: 4px;
-    border: 0;
-  }
-  tbody td::before {
-    content: attr(data-label);
-    color: var(--muted);
-    font-size: .68rem;
-    font-weight: 700;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-  }
-  tbody td:first-child { display: none; }
-  tbody td[data-label="Banka"] {
-    grid-column: 1 / -1;
-    padding: 16px 14px 12px;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--line);
-  }
-  tbody td[data-label="Banka"]::before { display: none; }
-  tbody td[data-label="Rozdiel od najlepšej"] { grid-column: 1 / -1; }
-  tbody td[data-label="Zdroj"] {
-    grid-column: 1 / -1;
-    padding-top: 10px;
-    border-top: 1px solid var(--line);
-  }
+  table { min-width: 0; table-layout: fixed; }
+  thead { position: sticky; top: 0; z-index: 2; }
+  th, td { padding: 12px 8px; }
+  th { font-size: .65rem; white-space: nowrap; }
+  th:first-child, td:first-child { padding-left: 12px; }
+  th:last-child, td:last-child { padding-right: 12px; }
+  .rank-column, .rate-column, .validity-column, .source-column { display: none; }
+  .bank-column { width: 38%; padding-left: 12px; }
+  .result-column { width: 31%; text-align: right; }
+  .difference-column { width: 31%; padding-right: 12px; text-align: right; }
+  tbody .bank-column, tbody .result-column, tbody .difference-column { vertical-align: top; }
+  .bank-name { display: flex; align-items: flex-start; gap: 5px; }
+  .bank-name strong { line-height: 1.25; }
+  .badge { display: none; }
+  .mobile-meta { display: block; margin-top: 4px; color: var(--muted); font-size: .68rem; font-weight: 400; line-height: 1.35; }
+  .result-column strong { white-space: nowrap; font-size: .9rem; }
+  .difference-column { color: var(--muted); font-size: .78rem; line-height: 1.35; }
+  .best-label { display: inline-block; color: var(--accent); font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .03em; }
+  tbody tr:hover td { background: color-mix(in srgb, var(--accent-soft) 55%, var(--surface)); }
 }

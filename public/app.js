@@ -136,13 +136,19 @@ function render() {
     const bestBadge = index === 0 ? '<span class="badge">Najlepší</span>' : '';
     return `
       <tr class="${index === 0 ? 'winner' : ''}">
-        <td data-label="#">${index + 1}</td>
-        <td data-label="Banka"><strong>${row.bank}</strong>${bestBadge}</td>
-        <td data-label="Použitý kurz">${localeRate(row.rate)}</td>
-        <td data-label="Výsledok"><strong>${localeNumber(row.result, targetCurrency)}</strong></td>
-        <td data-label="Rozdiel od najlepšej">${index === 0 ? '–' : `− ${differenceLabel(difference, targetCurrency, best.rate)}`}</td>
-        <td data-label="Platnosť">${dateLabel(row.validDate)}</td>
-        <td data-label="Zdroj"><a href="${row.officialUrl}" target="_blank" rel="noreferrer">Banka ↗</a></td>
+        <td class="rank-column">${index + 1}</td>
+        <td class="bank-column">
+          <span class="bank-name"><strong>${row.bank}</strong>${bestBadge}</span>
+          <span class="mobile-meta">Platnosť ${dateLabel(row.validDate)} · <a href="${row.officialUrl}" target="_blank" rel="noreferrer">zdroj ↗</a></span>
+        </td>
+        <td class="rate-column">${localeRate(row.rate)}</td>
+        <td class="result-column">
+          <strong>${localeNumber(row.result, targetCurrency)}</strong>
+          <span class="mobile-meta">kurz ${localeRate(row.rate)}</span>
+        </td>
+        <td class="difference-column">${index === 0 ? '<span class="best-label">najlepší</span>' : `− ${differenceLabel(difference, targetCurrency, best.rate)}`}</td>
+        <td class="validity-column">${dateLabel(row.validDate)}</td>
+        <td class="source-column"><a href="${row.officialUrl}" target="_blank" rel="noreferrer">Banka ↗</a></td>
       </tr>`;
   }).join('');
 }
